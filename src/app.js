@@ -43,31 +43,34 @@ const httpServer = app.listen(port, () => {
 });
 
 const socketServer = new Server(httpServer);
-
+let msgs = [];
 socketServer.on("connection", (socket) => {
+  socket.on("msg_front_to_back", (msg) => {
+    msgs.push(msg);
+    console.log(msgs);
+    socketServer.emit("todos_los_msgs", msgs);
+  });
+
   //BACK EMITE "msg_server_to_front"
-  socket.emit("msg_server_to_front", {
+  /* socket.emit("msg_server_to_front", {
     author: "server",
     msg: "bienvenido !!!",
-  });
-
+  }); */
   //BACK ATAJA "msg_front_to_back"
-  socket.on("msg_front_to_back", (msg) => {
+  /* socket.on("msg_front_to_back", (msg) => {
     console.log(msg);
   });
-
+ */
   //BACK ATAJA "data_dispositivo"
-  socket.on("data_dispositivo", (obj) => {
+  /* socket.on("data_dispositivo", (obj) => {
     console.log(obj);
-  });
-
+  }); */
   //BACK ATAJA "msg_random"
-  socket.on("msg_random", (msg) => {
+  /* socket.on("msg_random", (msg) => {
     console.log(msg);
-  });
-
-  socketServer.emit("msg_a_todos", {
+  }); */
+  /* socketServer.emit("msg_a_todos", {
     author: "server",
     msg: "para todos mis usuarios sockets concetados!!!!",
-  });
+  }); */
 });
