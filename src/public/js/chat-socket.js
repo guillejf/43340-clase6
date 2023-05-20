@@ -17,3 +17,14 @@ socket.emit("data_dispositivo", {
   version: 11,
   browser: "chrome",
 });
+
+setInterval(() => {
+  socket.emit("msg_random", {
+    author: "usuario anonimo (front)",
+    msg: Math.random(),
+  });
+}, 1000);
+
+socket.on("msg_a_todos", (msg) => {
+  console.log(msg);
+});

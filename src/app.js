@@ -48,7 +48,7 @@ socketServer.on("connection", (socket) => {
   //BACK EMITE "msg_server_to_front"
   socket.emit("msg_server_to_front", {
     author: "server",
-    msg: "bienvenido!!!",
+    msg: "bienvenido !!!",
   });
 
   //BACK ATAJA "msg_front_to_back"
@@ -59,5 +59,15 @@ socketServer.on("connection", (socket) => {
   //BACK ATAJA "data_dispositivo"
   socket.on("data_dispositivo", (obj) => {
     console.log(obj);
+  });
+
+  //BACK ATAJA "msg_random"
+  socket.on("msg_random", (msg) => {
+    console.log(msg);
+  });
+
+  socketServer.emit("msg_a_todos", {
+    author: "server",
+    msg: "para todos mis usuarios sockets concetados!!!!",
   });
 });
